@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        doodle: ['Rubik Doodle Triangles'],
+        inter: [ 'Inter']
+      }
+    },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["retro"],
+  },
 }
