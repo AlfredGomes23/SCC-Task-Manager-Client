@@ -3,7 +3,6 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import DashBoard from "../pages/DashBoard";
 import ErrorPage from "../pages/ErrorPAge";
-import TodaysTask from "../pages/TodaysTask";
 import AboutUs from "../pages/AboutUs";
 import LoginPage from "../pages/LoginPage";
 import Register from "../pages/Register";
@@ -21,10 +20,6 @@ const Routes = createBrowserRouter([
             {
                 path: 'dashboard',
                 element: <DashBoard/>
-            },
-            {
-                path: 'todays-task',
-                element: <TodaysTask/>
             },
             {
                 path: 'about-us',

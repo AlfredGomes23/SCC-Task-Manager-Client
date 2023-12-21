@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily: {
         doodle: ['Rubik Doodle Triangles'],
-        inter: [ 'Inter']
+        inter: [ 'Inter'],
+        pacifico: ['Pacifico']
       }
     },
   },
