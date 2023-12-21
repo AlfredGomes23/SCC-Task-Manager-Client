@@ -2,11 +2,11 @@
 import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-    const user = { email: 'sfjs', displayName: 'ustho' }
+    const user = { email: 'sfjs', displayName: 'utsho' }
     return (
         <div className="navbar fixed bg-base-300 rounded-2xl max-w-7xl flex flex-col lg:flex-row">
             <div className="flex-1">
-                <Link className="text-4xl md:text-5xl font-doodle text-accent mx-auto">SCC Task Manager</Link>
+                <Link to='/' className="text-4xl md:text-5xl font-doodle text-accent mx-auto">SCC Task Manager</Link>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1 space-x-1 flex- flex-row justify-center items-center">
