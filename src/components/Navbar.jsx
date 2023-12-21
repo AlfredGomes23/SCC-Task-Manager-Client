@@ -21,7 +21,7 @@ const Navbar = () => {
                                     <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Tailwind-CSS-Avatar-component" />
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-fit">
-                                    <li><p>{user?.displayName}</p></li>
+                                    <li><Link to='/profile'>{user?.displayName}</Link></li>
                                     <li><button className='btn btn-sm'>LogOut</button></li>
                                 </ul>
                             </div>
