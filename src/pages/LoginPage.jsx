@@ -1,9 +1,11 @@
 
 
+
 const LoginPage = () => {
+    
     return (
-        <div>
-            Log in
+        <div className="hero">
+            
         </div>
     );
 };

@@ -14,12 +14,12 @@ const AboutOurAudience = () => {
             <h3 className="text-accent text-2xl mt-5">Developers 🚀:</h3>
             <p className="px-24">Effortlessly manage your project tasks, deadlines, and collaborations. Stay focused on coding while we handle the task management for you.</p>
 
-            <h3 className="text-accent text-2xl mt-5">Corporate Professionals 🏢:</h3>
+            <h3 className="text-accent text-2xl mt-5">Corporate Professionals 💼:</h3>
             <p className="px-24">Streamline team collaboration and project tracking. Our platform ensures that your team stays organized and efficient, bringing projects to successful completion.</p>
 
-            <h3 className="text-accent text-2xl mt-5">Bankers 💼:</h3>
+            <h3 className="text-accent text-2xl mt-5">Bankers 🏢:</h3>
             <p className="px-24">Stay on top of financial tasks and project management. Our platform provides a centralized hub for managing tasks related to finance and banking operations.</p>
-        
+
             <div className="mt-5">
                 <p className="text-accent text-xl px-40">Our aim is to simplify any professional's workflow and help to achieve daily goals. Explore the benefits today!</p>
                 {/* buttons */}
