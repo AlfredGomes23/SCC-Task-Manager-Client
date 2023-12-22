@@ -36,7 +36,6 @@ const AboutUs = () => {
                         Get Started <TiChevronRightOutline className='text-xl' />
                         <span className="indicator-item badge badge-accent btn-accent">It's Free</span>
                     </Link>
-
                 </div>
             </div>
 
