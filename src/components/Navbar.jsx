@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const { user, logOut } = useMyContext();
-    console.log(user);
+    // console.log(user);
     //logout
     const handleLogOut = () => {
         logOut() && Swal.fire({
@@ -16,7 +16,7 @@ const Navbar = () => {
             showConfirmButton: false,
             timer: 1000
         });
-    }
+    };
 
     return (
         <div className="navbar bg-base-300 rounded-2xl flex flex-col lg:flex-row">

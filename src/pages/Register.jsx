@@ -54,7 +54,8 @@ const Register = () => {
                 });
             })
         setRegistering(false);
-    }
+    };
+    
     return (
         <div className="hero min-h-fit">
             <div className="hero-content flex-col">
