@@ -4,37 +4,65 @@ import useMyContext from "../hooks/useMyContext";
 import Swal from 'sweetalert2';
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 
 const GoogleSignIn = ({ from }) => {
-    const { user, signin } = useMyContext();
+    const { signin } = useMyContext();
     const [signingIn, setSigningIn] = useState(false);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
-    const handleSignIN = async () => {
-        await setSigningIn(true);
-        //signIn
-        signin().then(res => {
-            //check and store in db
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: `Welcome back, ${res.user.displayName}`,
-                showConfirmButton: false,
-                timer: 1000
+    const handleSignIN = () => {
+        setSigningIn(true);
+        try {
+            //signIn
+            signin().then(async resp => {
+                //check and store in db
+                await axiosPublic.get(`/user?email=${resp.user.email}`).then(res => {
+                    if (res.data.new) {
+                        //save new user in db
+                        axiosPublic.post('/users', {
+                            name: resp.user.displayName,
+                            email: resp.user.email,
+                            photoURL: resp.user.photoURL
+                        }).then(() => {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `Registration Completed,
+                                ❁❁ Welcome ❁❁, ${resp.user.displayName}`,
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            navigate(from, { replace: true });
+                        })
+                    } else {
+                        //old user
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: `SignIn Successful.
+                            Welcome Back, ${resp.user.displayName}`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate(from, { replace: true });
+                    }
+                });
             });
-            navigate(from, { replace: true });
-        }).catch(err => {
+        } catch (err) {
             Swal.fire({
                 position: "center",
                 icon: "error",
                 title: `${err.message}`,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 2500
             });
-        })
-    }
+        }
+        setSigningIn(false)
+    };
 
     return (<div className="mb-5 flex items-center gap-5 mx-auto">
         <p className="text-xl font-semibold">Continue With:</p>

@@ -36,7 +36,7 @@ const Register = () => {
                 title: `Registration Completed,
                 ❁❁ Welcome ❁❁, ${data.name}`,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2000
             });
             //navigate to previous page
             navigate(from, { replace: true });
@@ -47,7 +47,7 @@ const Register = () => {
                 icon: "error",
                 title: `${err.message}`,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 2500
             });
         }
         setRegistering(false);

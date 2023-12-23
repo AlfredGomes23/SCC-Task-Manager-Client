@@ -22,9 +22,10 @@ const LoginPage = () => {
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: `Welcome back, ${res.user.displayName}`,
+                title: `Login Successful.
+                Welcome Back, ${res.user.displayName}`,
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1500
             });
             navigate(from, { replace: true });
         }).catch(err => {
@@ -33,7 +34,7 @@ const LoginPage = () => {
                 icon: "error",
                 title: `${err.message}`,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 2500
             });
         })
         setLoggingIn(false);
