@@ -4,6 +4,7 @@ import loginGif from '../assets/login.gif'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useMyContext from "../hooks/useMyContext";
 import Swal from 'sweetalert2'
+import GoogleSignIn from "../components/GoogleSignIn";
 
 
 const LoginPage = () => {
@@ -17,18 +18,16 @@ const LoginPage = () => {
     const onSubmit = (data) => {
         setLoggingIn(true);
         //login
-        login(data.email, data.password)
-        .then(res => {
+        login(data.email, data.password).then(res => {
             Swal.fire({
                 position: "center",
                 icon: "success",
                 title: `Welcome back, ${res.user.displayName}`,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1000
             });
-            navigate(from, {replace:true});
-        })
-        .catch(err => {
+            navigate(from, { replace: true });
+        }).catch(err => {
             Swal.fire({
                 position: "center",
                 icon: "error",
@@ -74,6 +73,7 @@ const LoginPage = () => {
                                 <input type="submit" value="Login" className="btn btn-accent text-white text-xl mx-auto" />}
                         </div>
                     </form>
+                    <GoogleSignIn from={from} />
                     <p className="text-center mb-5">Already have an account?
                         <Link to='/login' className='link text-[#3027e2] font-bold underline ml-1'>Login here</Link>.</p>
                 </div>

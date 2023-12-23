@@ -33,7 +33,7 @@ const Navbar = () => {
                     {user?.email ? <>
                         <div className="avatar dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="w-12 rounded-full">
-                                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Tailwind-CSS-Avatar-component" />
+                                <img src={user.photoURL} alt={user.displayName} />
                             </div>
                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-fit">
                                 <li><Link to='/profile'>{user?.displayName}</Link></li>

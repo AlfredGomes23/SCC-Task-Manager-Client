@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useMyContext from "../hooks/useMyContext";
 import Swal from 'sweetalert2'
+import GoogleSignIn from "../components/GoogleSignIn";
 
 const Register = () => {
     const { user, createUser, updateUser } = useMyContext();
@@ -115,6 +116,7 @@ const Register = () => {
                                 <input type="submit" value="Register" className="btn btn-accent text-white text-xl btn-wide mx-auto" />}
                         </div>
                     </form>
+                    <GoogleSignIn from={from} />
                     <p className="text-center mb-5">Already have an account?
                         <Link to='/login' className='link text-[#3027e2] font-bold underline ml-1'>Login here</Link>.</p>
                 </div>
