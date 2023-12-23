@@ -1,23 +1,49 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import login from '../assets/login.gif'
-import { Link } from "react-router-dom";
+import loginGif from '../assets/login.gif'
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useMyContext from "../hooks/useMyContext";
+import Swal from 'sweetalert2'
 
 
 const LoginPage = () => {
+    const { login } = useMyContext();
     const [loggingIn, setLoggingIn] = useState(false);
-    const [err, setErr] = useState('');
     const { register, handleSubmit } = useForm();
+    const location = useLocation();
+    const from = location.state || '/';
+    const navigate = useNavigate();
+    //login
     const onSubmit = (data) => {
         setLoggingIn(true);
-        console.log(data);
+        //login
+        login(data.email, data.password)
+        .then(res => {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `Welcome back, ${res.user.displayName}`,
+                showConfirmButton: false,
+                timer: 2000
+            });
+            navigate(from, {replace:true});
+        })
+        .catch(err => {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: `${err.message}`,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        })
         setLoggingIn(false);
     }
     return (
         <div className="hero">
             <div className="hero-content flex-col md:flex-row">
                 <div className="hidden md:block">
-                    <img src={login} alt="login" className="w-80" />
+                    <img src={loginGif} alt="login" className="w-80" />
                 </div>
                 <div className="card shrink-0 max-w-sm shadow-2xl bg-base-200">
                     <h1 className="text-5xl font-bold text-center mt-5">Login now!</h1>
@@ -27,24 +53,18 @@ const LoginPage = () => {
                             <span className="indicator-item indicator-center badge text-accent font-bold">Email Address:</span>
                             <input
                                 type="email"
-                                {...register("email",
-                                    { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })}
+                                {...register("email")}
                                 placeholder="Your@email.address"
-                                className="input input-bordered" required/>
+                                className="input input-bordered" required />
                         </div>
                         {/* password */}
                         <div className="form-control indicator mt-5">
                             <span className="indicator-item indicator-center badge text-accent font-bold">Password:</span>
                             <input
                                 type="password"
-                                {...register("password",
-                                    { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/ })}
+                                {...register("password")}
                                 placeholder="Pa55w0rd"
-                                className="input input-bordered" required/>
-                        </div>
-                        {/* error */}
-                        <div className="max-w-lg ">
-                            {err ? <p className="text-center text-error font-semibold">{err}</p> : ''}
+                                className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-5">
                             {loggingIn ?

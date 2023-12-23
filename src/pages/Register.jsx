@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useMyContext from "../hooks/useMyContext";
 import Swal from 'sweetalert2'
 
@@ -8,7 +8,11 @@ const Register = () => {
     const { user, createUser, updateUser } = useMyContext();
     const [registering, setRegistering] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation();
+    const from = location.state || '/';
+    const navigate = useNavigate();
 
+    //register
     const onSubmit = (data) => {
         setRegistering(true);
         //create user
@@ -16,24 +20,37 @@ const Register = () => {
             .then(() => {
                 //set name & url
                 updateUser(data.name, data.photoURL)
-                    .then(() => {
+                    .then(res => {
                         console.log(user);
+                        //store in dB
                         Swal.fire({
                             position: "center",
                             icon: "success",
-                            title: "Congrats😀",
-                            text:"Registration Completed.",
+                            title: "Congrats😀,Registration Completed.",
+                            text: `Welcome to SCC Task Manager, ${res.displayName}`,
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        //store in dB
+                        navigate(from, { replace: true });                        
                     })
                     .catch(e => {
-                        console.log(e.message);
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: `${e.message}`,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     })
             })
             .catch(err => {
-                console.log(err.message);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: `${err.message}`,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
             })
         setRegistering(false);
     }

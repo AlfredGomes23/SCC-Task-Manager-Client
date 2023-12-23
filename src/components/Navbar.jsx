@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
     const { user, logOut } = useMyContext();
     console.log(user);
+    //logout
     const handleLogOut = () => {
         logOut() && Swal.fire({
             position: "center",
