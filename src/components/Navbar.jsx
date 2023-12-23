@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
+
 import { Link, NavLink } from 'react-router-dom';
+import useMyContext from '../hooks/useMyContext';
 
 const Navbar = () => {
-    const user = { email: 'sfjs', displayName: 'utsho' };
+    const {user} = useMyContext();
+    // console.log(user);
     return (
         <div className="navbar bg-base-300 rounded-2xl flex flex-col lg:flex-row">
             <div className="flex-1">

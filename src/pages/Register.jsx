@@ -1,14 +1,40 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
 import { Link } from 'react-router-dom';
-
+import useMyContext from "../hooks/useMyContext";
+import Swal from 'sweetalert2'
 
 const Register = () => {
+    const { user, createUser, updateUser } = useMyContext();
     const [registering, setRegistering] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = (data) => {
         setRegistering(true);
-        console.log(data);
+        //create user
+        createUser(data.email, data.password)
+            .then(() => {
+                //set name & url
+                updateUser(data.name, data.photoURL)
+                    .then(() => {
+                        console.log(user);
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Congrats😀",
+                            text:"Registration Completed.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        //store in dB
+                    })
+                    .catch(e => {
+                        console.log(e.message);
+                    })
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
         setRegistering(false);
     }
     return (
