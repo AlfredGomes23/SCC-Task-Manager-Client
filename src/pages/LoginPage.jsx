@@ -45,7 +45,8 @@ const LoginPage = () => {
                     <img src={loginGif} alt="login" className="w-80" />
                 </div>
                 <div className="card shrink-0 max-w-sm shadow-2xl bg-base-200">
-                    <h1 className="text-5xl font-bold text-center mt-5">Login now!</h1>
+                    <h1 className="text-4xl text-accent text-center mt-5 font-doodle">Login now!</h1>
+                    <div className="divider divider-accent w-full md:w-2/3 mx-auto"></div>
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         {/* email */}
                         <div className="form-control indicator">
@@ -74,8 +75,8 @@ const LoginPage = () => {
                         </div>
                     </form>
                     <GoogleSignIn from={from} />
-                    <p className="text-center mb-5">Already have an account?
-                        <Link to='/login' className='link text-[#3027e2] font-bold underline ml-1'>Login here</Link>.</p>
+                    <p className="text-center mb-5">New here?
+                        <Link to='/register' className='link text-[#3027e2] font-bold underline ml-1'>Register now!</Link>.</p>
                 </div>
             </div>
         </div>

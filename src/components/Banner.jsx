@@ -21,7 +21,7 @@ const Banner = () => {
                     className='text-xl md:text-2xl font-pacifico text-center' />
                 <Link to='/login' className="btn btn-outline btn-sm md:btn-md flex gap-0 w-fit mx-auto indicator">
                     Let's Explore<TiChevronRightOutline className='text-xl' />
-                    <span className="indicator-item badge badge-success">It's Free</span>
+                    <span className="indicator-item badge badge-success text-white">It's Free</span>
                 </Link>
             </div>
         </div>

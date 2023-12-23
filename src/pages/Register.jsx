@@ -4,58 +4,55 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useMyContext from "../hooks/useMyContext";
 import Swal from 'sweetalert2'
 import GoogleSignIn from "../components/GoogleSignIn";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
-    const { user, createUser, updateUser } = useMyContext();
+    const { createUser, updateUser } = useMyContext();
     const [registering, setRegistering] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const location = useLocation();
     const from = location.state || '/';
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     //register
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         setRegistering(true);
-        //create user
-        createUser(data.email, data.password)
-            .then(() => {
-                //set name & url
-                updateUser(data.name, data.photoURL)
-                    .then(res => {
-                        console.log(user);
-                        //store in dB
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Congrats😀,Registration Completed.",
-                            text: `Welcome to SCC Task Manager, ${res.displayName}`,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate(from, { replace: true });                        
-                    })
-                    .catch(e => {
-                        Swal.fire({
-                            position: "center",
-                            icon: "error",
-                            title: `${e.message}`,
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
-                    })
-            })
-            .catch(err => {
-                Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: `${err.message}`,
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-            })
+        try {
+            //create user
+            await createUser(data.email, data.password);
+            //set name & url
+            await updateUser(data.name, data.photoURL);
+            //store user in dB
+            await axiosPublic.post('/users', {
+                name: data.name,
+                email: data.email,
+                photoURL: data.photoURL
+            });
+            //show alert
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `Registration Completed,
+                ❁❁ Welcome ❁❁, ${data.name}`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            //navigate to previous page
+            navigate(from, { replace: true });
+        } catch (err) {
+            console.log(err.message);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: `${err.message}`,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
         setRegistering(false);
     };
-    
+
     return (
         <div className="hero min-h-fit">
             <div className="hero-content flex-col">
