@@ -24,7 +24,7 @@ const GoogleSignIn = ({ from }) => {
                 showConfirmButton: false,
                 timer: 1000
             });
-            navigate(from, { relative: true });
+            navigate(from, { replace: true });
         }).catch(err => {
             Swal.fire({
                 position: "center",
@@ -38,9 +38,13 @@ const GoogleSignIn = ({ from }) => {
 
     return (<div className="mb-5 flex items-center gap-5 mx-auto">
         <p className="text-xl font-semibold">Continue With:</p>
-        <button onClick={handleSignIN} className="btn btn-outline btn-accent">
-            <FcGoogle className="text-2xl" />
-        </button>
+        {signingIn ?
+            <button className="btn btn-outline btn-accent">
+                <FcGoogle className="text-2xl animate-spin" />
+            </button> :
+            <button onClick={handleSignIN} className="btn btn-outline btn-accent">
+                <FcGoogle className="text-2xl" />
+            </button>}
     </div>);
 };
 
