@@ -116,6 +116,7 @@ const Register = () => {
                         <div className="max-w-lg ">
                             {errors.password && <p className="text-center text-error font-semibold">Password MUST contain Minimum 6 characters Including at least a Upper, a Lower case letter, also a Number</p>}
                         </div>
+                        {/* submit btn */}
                         <div className="form-control mt-6">
                             {registering ?
                                 <button className="btn btn-accent text-white text-xl btn-wide mx-auto">
