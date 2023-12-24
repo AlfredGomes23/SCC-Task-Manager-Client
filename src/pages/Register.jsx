@@ -7,14 +7,24 @@ import GoogleSignIn from "../components/GoogleSignIn";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
-    const { createUser, updateUser } = useMyContext();
+    const { user, createUser, updateUser, logOut } = useMyContext();
     const [registering, setRegistering] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const location = useLocation();
-    const from = location.state || '/';
+    const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
-
+    
+    //logout logged in or signed in user
+    if (user !== null) {
+        logOut() && Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Logged Out",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
     //register
     const onSubmit = async (data) => {
         setRegistering(true);

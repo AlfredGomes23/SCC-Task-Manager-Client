@@ -8,12 +8,23 @@ import GoogleSignIn from "../components/GoogleSignIn";
 
 
 const LoginPage = () => {
-    const { login } = useMyContext();
+    const { user, login, logOut } = useMyContext();
     const [loggingIn, setLoggingIn] = useState(false);
     const { register, handleSubmit } = useForm();
     const location = useLocation();
-    const from = location.state || '/';
+    const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
+
+    //logout logged in or signed in user
+    if (user !== null) {
+        logOut() && Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Logged Out",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
     //login
     const onSubmit = (data) => {
         setLoggingIn(true);
@@ -38,7 +49,7 @@ const LoginPage = () => {
             });
         })
         setLoggingIn(false);
-    }
+    };
     return (
         <div className="hero">
             <div className="hero-content flex-col md:flex-row">

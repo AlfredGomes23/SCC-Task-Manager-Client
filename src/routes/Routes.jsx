@@ -7,36 +7,43 @@ import AboutUs from "../pages/AboutUs";
 import LoginPage from "../pages/LoginPage";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Routes = createBrowserRouter([
     {
         path: "/",
-        element: <MainLayout/>,
-        errorElement:<ErrorPage/>,
+        element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: 'dashboard',
-                element: <DashBoard/>
+                element:
+                    <PrivateRoutes>
+                        <DashBoard />
+                    </PrivateRoutes>
             },
             {
                 path: 'about-us',
-                element: <AboutUs/>
+                element: <AboutUs />
             },
             {
                 path: 'profile',
-                element: <Profile/>
+                element:
+                    <PrivateRoutes>
+                        <Profile />
+                    </PrivateRoutes >
             },
             {
                 path: 'login',
-                element: <LoginPage/>
+                element: <LoginPage />
             },
             {
                 path: 'register',
-                element: <Register/>
+                element: <Register />
             },
         ]
     },
