@@ -1,19 +1,52 @@
 import { useForm } from "react-hook-form";
 import useMyContext from "../hooks/useMyContext";
-import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useState } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import Swal from "sweetalert2";
 
 
 const CreateNewTask = () => {
     const { user } = useMyContext();
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const axiosPublic = useAxiosPublic();
-    const [adding, setAdding] = useState(false)
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const axiosPrivate = useAxiosPrivate();
+    const [adding, setAdding] = useState(false);
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         setAdding(true);
         console.log(data);
         //add in db
+        try {
+            await axiosPrivate.post('/task', {
+                email: user.email,
+                task: data.taskName,
+                description: data.description,
+                priority: data.taskPriority,
+                data: new Date,
+                status: 'todo'
+            });
+            // close the modal
+            document.getElementById('addNewTaskModal').close();
+            //reset the from
+            reset();
+            //show alter
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `${data.taskName} added in To-Do List`,
+                showConfirmButton: false,
+                timer: 1000
+            });
+            console.log(1);
+        } catch (err) {
+            console.log(err.message);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: `${err.message}`,
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
         setAdding(false)
     };
     return (

@@ -1,11 +1,18 @@
+// Dashboard.js
 
+import { useState, useEffect } from 'react';
+import CreateNewTask from '../components/CreateNewTask';
 
-const DashBoard = () => {
+const Dashboard = () => {
+
+    
+
     return (
         <div>
-            DashBoard
+            <h2>Todo</h2>
+            <CreateNewTask/>
         </div>
     );
 };
 
-export default DashBoard;
+export default Dashboard;
