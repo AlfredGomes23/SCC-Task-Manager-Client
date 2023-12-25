@@ -31,14 +31,14 @@ const ContactUs = () => {
 
             {/* address */}
             <h3 className="text-center text-2xl underline mt-7 mb-5"> Our Address:</h3>
-            <p className="flex justify-center items-center text-center text-xl">
+            <p className="flex justify-center items-center text-center text-lg md:text-xl">
                 <MdLocationOn className="text-2xl text-accent" />
                 Motijheel, Dhaka-1000, Bangladesh
             </p>
             <p className="text-center text-xl mt-3 mb-7">If you prefer face-to-face conversations, our office doors are always open. Feel free to drop by during our business hours.</p>
 
             {/* office hours */}
-            <div className="border-2 border-accent  rounded-lg w-96 mx-auto mb-7">
+            <div className="border-2 border-accent  rounded-lg md:w-96 mx-auto mb-7">
                 <h3 className="flex justify-center items-center text-2xl underline mt-7 mb-5">
                     <FaBusinessTime className="text-accent mr-1 " />
                     Business Hours:

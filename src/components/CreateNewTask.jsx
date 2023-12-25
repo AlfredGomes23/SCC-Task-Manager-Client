@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import useMyContext from "../hooks/useMyContext";
 import { useState } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Swal from "sweetalert2";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 
-const CreateNewTask = () => {
+const CreateNewTask = ({ refetch }) => {
     const { user } = useMyContext();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const axiosPrivate = useAxiosPrivate();
@@ -21,14 +23,14 @@ const CreateNewTask = () => {
                 task: data.taskName,
                 description: data.description,
                 priority: data.taskPriority,
-                data: new Date,
+                date: new Date().toISOString().split("T")[0],
                 status: 'todo'
             });
             // close the modal
             document.getElementById('addNewTaskModal').close();
             //reset the from
             reset();
-            //show alter
+            //show alert
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -36,7 +38,8 @@ const CreateNewTask = () => {
                 showConfirmButton: false,
                 timer: 1000
             });
-            console.log(1);
+            //refresh the lists
+            refetch();
         } catch (err) {
             console.log(err.message);
             Swal.fire({
@@ -50,15 +53,17 @@ const CreateNewTask = () => {
         setAdding(false)
     };
     return (
-        <div>
+        <div className="">
             {/* modal btn */}
-            <button className="btn" onClick={() => document.getElementById('addNewTaskModal').showModal()}>Add New Task</button>
+            <button className="btn text-lg btn-accent" onClick={() => document.getElementById('addNewTaskModal').showModal()}>
+                <IoIosAddCircleOutline className="text-2xl" />Add New Task
+            </button>
             {/* modal */}
             <dialog id="addNewTaskModal" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <button onClick={() => reset()} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
 
                     {/* modal content */}
@@ -107,7 +112,8 @@ const CreateNewTask = () => {
                                 <button className="btn btn-accent text-white text-xl mx-auto">
                                     Adding<span className="loading loading-dots text-white"></span>
                                 </button> :
-                                <input type="submit" value="Add Task" className="btn btn-accent text-white text-xl mx-auto" />}
+                                <input type="submit" value="Add Task" className="btn btn-accent text-white text-xl mx-auto" />
+                            }
                         </div>
                     </form>
                 </div>
