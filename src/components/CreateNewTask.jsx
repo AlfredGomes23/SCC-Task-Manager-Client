@@ -15,7 +15,7 @@ const CreateNewTask = ({ refetch }) => {
 
     const onSubmit = async (data) => {
         setAdding(true);
-        console.log(data);
+        // console.log(data);
         //add in db
         try {
             await axiosPrivate.post('/task', {
