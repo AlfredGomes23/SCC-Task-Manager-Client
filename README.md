@@ -1,8 +1,16 @@
-# React + Vite
+# Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  
 
-Currently, two official plugins are available:
+- User can login and register user email and also Gmail.( Password must contain at least one upper, lower case letter and a number)
+- User can add a todo task, see in todo list.
+- User can drag a todo task and drop in to completed list when completed.(user can only drop a todo task in to completed list)
+- None can access privide routes wothout login or signin.(Like dashboard, prifile)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+	
+
+  
+
+## [Live Link1](https://scc-task-manager.web.app)
+## [Live Link2](https://scc-task-manager.firebaseapp.com)
+## [Live Link3](https://cosmic-crisp-46ba03.netlify.app)
